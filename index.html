@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Our Home | Pinecrest Vacation Rentals</title>
+  <!--
+    PINECREST VACATION RENTALS - AMAZON ASSOCIATES CATALOG
+    ======================================================
+    STATUS: READY TO USE
+    All 165 product links are live Amazon search URLs with your
+    affiliate tag (empiretext-20). Commissions are tracked automatically.
+
+    OPTIONAL UPGRADE:
+    Run pinecrest-asin-upgrader.py to convert search links to direct
+    ASIN product links (requires SP-API credentials as env vars).
+
+    HOSTING:
+    1. Host this file (GitHub Pages, Netlify, or your domain)
+    2. Generate a QR code pointing to the hosted URL
+    3. Print the QR card (pinecrest-qr-card.html) and frame at the property
+  -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FAFAF9;
+      --card-bg: #FFFFFF;
+      --text: #1A1A2E;
+      --text-light: #6B7280;
+      --accent: #E94560;
+      --accent2: #0F3460;
+      --border: #E5E7EB;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-hover: 0 10px 25px rgba(0,0,0,0.1);
+      --radius: 12px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--accent2) 0%, #16213E 100%);
+      color: white; padding: 48px 24px 40px; text-align: center;
+    }
+    .hero .badge {
+      display: inline-block; background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25); border-radius: 20px;
+      padding: 4px 14px; font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;
+    }
+    .hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .hero p { font-size: 15px; opacity: 0.85; max-width: 420px; margin: 0 auto; }
+
+    /* Sticky Nav */
+    .cat-nav {
+      position: sticky; top: 0; z-index: 100; background: var(--card-bg);
+      border-bottom: 1px solid var(--border); padding: 10px 16px;
+      overflow-x: auto; display: flex; gap: 8px;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .cat-nav::-webkit-scrollbar { display: none; }
+    .cat-nav a {
+      flex-shrink: 0; padding: 7px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 600; text-decoration: none;
+      color: var(--text-light); background: var(--bg);
+      border: 1px solid var(--border); transition: all 0.2s; white-space: nowrap;
+    }
+    .cat-nav a:hover, .cat-nav a.active {
+      background: var(--accent); color: white; border-color: var(--accent);
+    }
+
+    /* Container */
+    .container { max-width: 600px; margin: 0 auto; padding: 0 16px 80px; }
+
+    /* Section Headers */
+    .section-header { padding: 28px 0 14px; }
+    .section-header h2 {
+      font-size: 20px; font-weight: 700; color: var(--accent2);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-header h2 .icon { font-size: 22px; }
+    .section-header p { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+    /* Product Cards */
+    .product-card {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 14px; margin-bottom: 10px;
+      text-decoration: none; color: var(--text);
+      box-shadow: var(--shadow); transition: all 0.2s ease;
+    }
+    .product-card:hover {
+      box-shadow: var(--shadow-hover); transform: translateY(-1px); border-color: var(--accent);
+    }
+    img.product-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      object-fit: contain; flex-shrink: 0; background: #F8F8F8;
+    }
+    div.product-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: linear-gradient(135deg, #F0F4FF 0%, #E8EDFF 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .product-info { flex: 1; min-width: 0; }
+    .product-info .name { font-size: 14px; font-weight: 600; }
+    .product-info .desc { font-size: 11px; color: var(--text-light); line-height: 1.4; }
+    .product-info .location {
+      font-size: 10px; color: var(--accent); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px;
+    }
+    .product-arrow {
+      color: var(--text-light); font-size: 18px; flex-shrink: 0; transition: transform 0.2s;
+    }
+    .product-card:hover .product-arrow { transform: translateX(3px); color: var(--accent); }
+
+
+    /* Subcategory Tabs */
+    .sub-tabs {
+      display: flex; gap: 6px; padding: 8px 0 12px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .sub-tabs::-webkit-scrollbar { display: none; }
+    .sub-tab {
+      flex-shrink: 0; padding: 5px 12px; border-radius: 16px;
+      font-size: 11px; font-weight: 600; cursor: pointer;
+      color: var(--text-light); background: var(--bg);
+      border: 1px solid var(--border); transition: all 0.2s;
+      white-space: nowrap; font-family: inherit;
+    }
+    .sub-tab:hover { border-color: var(--accent2); color: var(--accent2); }
+    .sub-tab.active {
+      background: var(--accent2); color: white; border-color: var(--accent2);
+    }
+
+    /* Disclosure */
+    .disclosure {
+      text-align: center; padding: 24px 16px; font-size: 11px;
+      color: var(--text-light); line-height: 1.6;
+      border-top: 1px solid var(--border); margin-top: 40px;
+    }
+
+    @media (min-width: 480px) {
+      .hero { padding: 56px 32px 48px; }
+      .hero h1 { font-size: 34px; }
+      .container { padding: 0 24px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="badge">As Seen In Our Home</div>
+    <h1>Shop Our Favorites</h1>
+    <p>Loved something during your stay? Here's where to get it for your own home.</p>
+  </div>
+
+  <nav class="cat-nav">
+    <a href="#kitchen">Kitchen</a>
+    <a href="#master">Master Bed</a>
+    <a href="#guest">Guest Beds</a>
+    <a href="#living">Living Room</a>
+    <a href="#bath">Bathrooms</a>
+    <a href="#outdoor">Outdoor</a>
+    <a href="#gym">Home Gym</a>
+    <a href="#laundry">Laundry</a>
+    <a href="#lighting">Lighting</a>
+    <a href="#books">Books</a>
+    <a href="#cleaning">Cleaning</a>
+    <a href="#hardware">Hardware</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- =====================================================
+         KITCHEN & COFFEE BAR
+         ===================================================== -->
+    <div class="section-header" id="kitchen">
+      <h2><span class="icon">&#9749;</span> Kitchen & Coffee Bar</h2>
+      <p>Appliances, cookware, and everything on the counters</p>
+    </div>
+
+    <div class="sub-tabs" data-section="kitchen">
+      <button class="sub-tab active" data-tab="kitchen-0">Appliances</button>
+      <button class="sub-tab" data-tab="kitchen-1">Cookware & Utensils</button>
+      <button class="sub-tab" data-tab="kitchen-2">Drinkware & Dining</button>
+      <button class="sub-tab" data-tab="kitchen-3">Coffee Bar</button>
+      <button class="sub-tab" data-tab="kitchen-4">Sink & Cleaning</button>
+      <button class="sub-tab" data-tab="kitchen-5">Pantry & Storage</button>
+    </div>
+
+    <div class="sub-panel" id="kitchen-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B0855B5Z6F?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/714AwxiuijL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Ninja Professional Plus Blender</div>
+        <div class="desc">BN701, 1400 watts, 72oz pitcher</div>
+        <div class="location">Kitchen Counter</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08FBLRGNS?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51yqV0dGNSL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Oster 2-Slice Toaster</div>
+        <div class="desc">Stainless steel, advanced toast technology</div>
+        <div class="location">Kitchen Counter</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B09W5KRGQX?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71v4YDMdmuL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">FOHERE Electric Citrus Juicer</div>
+        <div class="desc">Brushed stainless steel, two interchangeable cones</div>
+        <div class="location">Kitchen Counter</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B01NBKTPTS?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71nx65qZq6L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Instant Pot Duo Plus 9-in-1</div>
+        <div class="desc">6-quart electric pressure cooker, slow cooker, rice cooker & more</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08KFPQYPD?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71F0nFExA9L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Aroma Housewares Stainless Rice Cooker</div>
+        <div class="desc">ARC-753SG, 6-cup, white</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B00006IUWA?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51DddaY-uxL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Presto PopLite Popcorn Popper</div>
+        <div class="desc">Hot air popper, red</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CTR2XG8W?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51Gy-O9fmbL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">KitchenAid 5-Speed Hand Mixer</div>
+        <div class="desc">KHM512IC, ice blue</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07XXSYLL8?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71-YDwjspSL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">ThermoPro Instant Read Meat Thermometer</div>
+        <div class="desc">TP03H, waterproof with backlight</div>
+        <div class="location">Kitchen / Grill</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0C6W6RHL2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61s1og4gOKL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Westinghouse Instant Hot & Cold Water Dispenser</div>
+        <div class="desc">Brushed nickel faucet</div>
+        <div class="location">Kitchen Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DRN45WSH?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81m8OjPLz6L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Copper Oven Liners (2-Pack)</div>
+        <div class="desc">17x25" non-stick, reusable, BPA free</div>
+        <div class="location">Oven</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B085FVKYSG?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71MswGmCRKL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">ORLANDO 13x13" Undermount Bar Sink</div>
+        <div class="desc">Stainless steel 18 gauge with strainer</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="kitchen-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B09ZV37WC6?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81Z-eahVPRL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">HexClad 12-Inch Hybrid Nonstick Frying Pan</div>
+        <div class="desc">Dishwasher & oven safe, induction ready</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07TZRGF4P?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91HHlYkNOlL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">casaWare 3pc Cookie Sheet Set</div>
+        <div class="desc">Commercial weight, blue granite</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07PZF3QS3?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51Byq+vTy1L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">KitchenAid All Purpose Kitchen Shears</div>
+        <div class="desc">Stainless steel, dishwasher safe, protective sheath</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B082N73YPV?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71qiVS-ZHpL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">OXO Good Grips Stainless Steel Turner</div>
+        <div class="desc">Classic spatula</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B00L9X6M6I?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61DKmImi7aL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">OXO Good Grips Butter Dish</div>
+        <div class="desc">Classic butter keeper</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07DJ53GZQ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71pTVVH3VrL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Spring Chef Magnetic Measuring Spoons</div>
+        <div class="desc">Set of 8 with leveler, stainless steel</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DXPB13Z4?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71xOdX7KUAL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Hammered Silverware Set, 40-Piece</div>
+        <div class="desc">Stainless steel, modern design, service for 8</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08M5C45YF?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81I6yKaYH2L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Marco Almond Rainbow Titanium Spoons, Set of 8</div>
+        <div class="desc">Long handle, great for iced drinks & desserts</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B081GKTVLH?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/712uYPdBBVL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Shinemade Trivet Mat, Set of 3</div>
+        <div class="desc">Silicone pot holders & hot pads</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="kitchen-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B09SF25SXD?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/817e5nMU1rL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">JoyJolt HUE Stemless Wine Glasses, Set of 6</div>
+        <div class="desc">15oz, colored tumblers</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08ZC7D982?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/617xJ6HoYVL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">YUYUHUA 32oz Tumblers, Set of 12</div>
+        <div class="desc">BPA-free, dishwasher safe, 4 assorted colors</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CD2C6WX7?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61f1UOPVv4L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Artena Cereal Bowls, Set of 6</div>
+        <div class="desc">26oz ceramic, seawave pattern, dishwasher safe</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CPTR9L95?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71B4Y5P+yWL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Getstar Pasta Bowls, Set of 6</div>
+        <div class="desc">8.5" shallow bowls, 32oz, white</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CN1PPVN6?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61+MewjexlL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Peas in a Pod Salt & Pepper Shakers</div>
+        <div class="desc">Ceramic magnetic, 3-piece gift set</div>
+        <div class="location">Kitchen Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B06XGY5B1S?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61kiPf58pOL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">JASSINS Fruit Coasters, Set of 7</div>
+        <div class="desc">Non-slip silicone, cute fruit slice design</div>
+        <div class="location">Kitchen / Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B002U5SC3K?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61gawxd6lAL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">BIA Cordon Bleu White Vinegar Bottle</div>
+        <div class="desc">Decorative ceramic vinegar dispenser</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="kitchen-3" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B07S98411N?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81+HcYgDo1L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Ninja 12-Cup Programmable Coffee Maker</div>
+        <div class="desc">CE251, stainless steel</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08RQZ39WC?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/713uw3fFneL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Mr. Coffee 12-Cup Electric Grinder</div>
+        <div class="desc">IDS77, 3-speed, black</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0F8QPGBVJ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61dqfKsNpzL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Nifty Solutions Bamboo Tea Box</div>
+        <div class="desc">5-compartment, stores up to 100 packets</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07TCD74ST?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/611plTmrFZL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">OXO Good Grips Sugar Dispenser</div>
+        <div class="desc">Pour spout sugar container</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08G1TF3L1?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61Ykm0ACudL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Santa Barbara Design Studio Mug, 16oz</div>
+        <div class="desc">"I Love Us" face-to-face stoneware</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B01MR5F527?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61mBGQLbI+L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Low Acid Organic Coffee by Java Planet</div>
+        <div class="desc">Guatemalan single origin, medium roast, whole bean, 1lb</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="kitchen-4" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B07HH3CKC8?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91-ckG5vDkL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">DG Collections Kitchen Dish Towels, 12-Pack</div>
+        <div class="desc">Salsa stripe, 100% cotton waffle weave</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DCX77SQB?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61aoMIoPWhL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">PrepSolutions Soap Dispenser</div>
+        <div class="desc">Kitchen sink soap dispenser</div>
+        <div class="location">Kitchen Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08BZS4LX7?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/514H3r-QYyL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">HULISEN 3-in-1 Kitchen Sink Caddy</div>
+        <div class="desc">Sponge + brush holder, stainless steel, adhesive mount</div>
+        <div class="location">Kitchen Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B082MZ7TK9?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71cZ39VSsFL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">MR.SIGA Bamboo Palm Brush, 2-Pack</div>
+        <div class="desc">Scrub brush for dishes, pots & pans</div>
+        <div class="location">Kitchen Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0BN7VM2BX?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81nLLmyM6zL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Docduet Steel Wool Scrubbers, 6-Pack</div>
+        <div class="desc">Flexible pads for pots, pans & grills</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B089WJBQ5G?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61gi8kXPqfL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">MicoYang Silicone Dish Drying Mat (XXL)</div>
+        <div class="desc">24x18", heat-resistant, white</div>
+        <div class="location">Kitchen Counter</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0153UIJOK?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61bEL1O5k9L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Rev-A-Shelf 35-Qt Pullout Trash Can</div>
+        <div class="desc">Chrome wire bottom mount, black</div>
+        <div class="location">Under Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07PWM6423?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71nsg-6TL9L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Rev-A-Shelf 25" Stainless Tip-Out Tray</div>
+        <div class="desc">Hidden sink front storage</div>
+        <div class="location">Kitchen Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="kitchen-5" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B0FM8K89GJ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61zEqiyFOtL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Cute Chip Clips, 9-Piece Set</div>
+        <div class="desc">Vegetable shaped, acrylic bag sealers</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CZ39WHLH?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71fom4xplPL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">UKYLIN Glass Storage Jar with Wood Lid</div>
+        <div class="desc">750ml airtight canister</div>
+        <div class="location">Coffee Bar</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B098F26YZ6?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51oWoywzI4S._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Basket Labels Clip Set, 32-Piece</div>
+        <div class="desc">Kitchen clip labels with chalk markers, white</div>
+        <div class="location">Pantry</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0BMZZ2P4W?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61A1LQ65eWL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">SEANADO Trash Bag Dispenser</div>
+        <div class="desc">Wall mount acrylic roll holder</div>
+        <div class="location">Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- Tableware -->
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- =====================================================
+         MASTER BEDROOM (KING)
+         ===================================================== -->
+    <div class="section-header" id="master">
+      <h2><span class="icon">&#128081;</span> Master Bedroom</h2>
+      <p>King-size bedding, pillows, and comfort essentials</p>
+    </div>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DH6H2CQB?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71UQJQLM76L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Tommy Bahama King Sheets</div>
+        <div class="desc">Cotton percale, Bahama Isle Orange</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DC5FGFPB?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51oSbz+gTSL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Martex EcoPure King Sheets</div>
+        <div class="desc">100% organic cotton, comfort washed, orange</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07CWRQVK2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61t-vSJPl1L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">EASELAND King Down Alternative Comforter</div>
+        <div class="desc">All season, reversible, white, 90x102"</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07MY34QH7?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81H3-5WU+GL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">LINENSPA King Memory Foam Mattress Topper</div>
+        <div class="desc">2" gel infused, CertiPUR certified</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B09QCSRRCD?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61c1EgFF5-L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">MZOIMZO King Pillows, Set of 2</div>
+        <div class="desc">Cooling hotel quality, down alternative fill</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08DS9ZNYW?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61eSYiH2esL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Utopia Bedding King Pillows, Set of 2</div>
+        <div class="desc">Cooling hotel quality, gusseted</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07J6BDLFY?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71tJ5woyKBL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">AllerEase King Pillow Protectors, Set of 4</div>
+        <div class="desc">Moisture wicking, allergy protection, zippered</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CDSCCWTK?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71UtB0EjA-L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Royale Linens King Pillowcases, Set of 2</div>
+        <div class="desc">1800 brushed microfiber, coral</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08Z3RB2SF?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81HNjLYT8NL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">GREEN ORANGE King Fleece Blanket</div>
+        <div class="desc">108x90", mustard yellow, soft & plush</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B074FL2HL2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71-3koMydDL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">LectroFan White Noise Machine</div>
+        <div class="desc">20 unique non-looping sounds, sleep timer</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0F1N3GR88?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81FJE6Ay1uL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">VIEROSE 20" Vanity Makeup Mirror</div>
+        <div class="desc">3 lighting modes, dimmable LED halo, black</div>
+        <div class="location">Master Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <!-- =====================================================
+         GUEST BEDROOMS (QUEEN & FULL)
+         ===================================================== -->
+    <div class="section-header" id="guest">
+      <h2><span class="icon">&#128716;</span> Guest Bedrooms</h2>
+      <p>Queen and full-size bedding, plus kid-friendly extras</p>
+    </div>
+
+    <div class="sub-tabs" data-section="guest">
+      <button class="sub-tab active" data-tab="guest-0">Bedding</button>
+      <button class="sub-tab" data-tab="guest-1">Mattress & Comfort</button>
+      <button class="sub-tab" data-tab="guest-2">Baby & Extras</button>
+    </div>
+
+    <div class="sub-panel" id="guest-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B0DYXG2XM1?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71n56ELUjAL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Poppy & Fritz Queen Sheets</div>
+        <div class="desc">Cotton percale, avocado print</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B00G9BLTPY?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61uYduu5JKL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">1500 Supreme Collection Twin Sheets</div>
+        <div class="desc">Tropical leaf teal pattern, deep pocket</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FNWKLQY4?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91ZNFtljPSL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Manyshofu Boho Queen Duvet Cover Set</div>
+        <div class="desc">Tufted burnt orange, 5-piece with shams</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0D1KBM9FY?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81rQUvDViLL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Burnt Orange Duvet Cover Queen</div>
+        <div class="desc">3pc boho tufted terracotta, 90x90"</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0C4FDMM28?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81LUNDYMMLL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">WARMDERN Boho Queen Duvet Cover</div>
+        <div class="desc">Yellow striped tufted texture, 3-piece</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="guest-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B07D276DRM?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61t-vSJPl1L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">EASELAND Queen Down Alternative Comforter</div>
+        <div class="desc">All season, reversible, white, 88x88"</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07XF71JFZ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61y9TD0rr0L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">COONP Queen Mattress Topper</div>
+        <div class="desc">Extra thick pillowtop, 400TC cotton, 8-21" deep pocket</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B01KBKHZRO?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71JVDWhvG6S._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Cooling Full Mattress Topper</div>
+        <div class="desc">Extra thick pillowtop, 400TC cotton</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0792N6657?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81vDHMmpeEL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Lucid 2" Full Memory Foam Mattress Topper</div>
+        <div class="desc">Gel infused, ventilated, CertiPUR certified</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07J6BDLFW?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71zo0ugEm6L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">AllerEase Queen Pillow Protectors, Set of 4</div>
+        <div class="desc">Temperature balancing, zippered</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B082VS9V4P?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81ygniKk+GL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Alyvia Spring Box Spring Cover Full</div>
+        <div class="desc">Jersey knit, stretchy wrap around, navy</div>
+        <div class="location">Guest Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="guest-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B00DJ8HX96?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/616Ffi6oEkL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">S SECRETLAND Tri-Fold Mattress, Twin</div>
+        <div class="desc">6" memory foam, washable cover, foldable for guests</div>
+        <div class="location">Master Closet</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08BT16TH5?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81V9AnXe5cL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Dream On Me Zodiak Portable Playard</div>
+        <div class="desc">Lightweight, breathable mesh, removable padded mat</div>
+        <div class="location">Guest Bedroom Closet</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0B8T5ZZ24?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51Y+xGZ9brL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">American Baby Co. Pack N Play Sheet, 2-Pack</div>
+        <div class="desc">100% organic cotton jersey, white</div>
+        <div class="location">Guest Bedroom Closet</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FGMRMBHW?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51vhElHCbQL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">GO Premium Plush Throw Blanket</div>
+        <div class="desc">50x60", white fleece</div>
+        <div class="location">Guest Bedroom / Couch</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- =====================================================
+         LIVING ROOM & ENTERTAINMENT
+         ===================================================== -->
+    <div class="section-header" id="living">
+      <h2><span class="icon">&#128250;</span> Living Room & Entertainment</h2>
+      <p>TVs, soundbar, fireplace, and decor</p>
+    </div>
+
+    <div class="sub-tabs" data-section="living">
+      <button class="sub-tab active" data-tab="living-0">Entertainment</button>
+      <button class="sub-tab" data-tab="living-1">Décor</button>
+      <button class="sub-tab" data-tab="living-2">Office</button>
+    </div>
+
+    <div class="sub-panel" id="living-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B0DYQF1Q3Z?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91CEbtJBAeL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">LG OLED A1 55" 4K Smart TV</div>
+        <div class="desc">Dolby Vision IQ & Atmos, Alexa built-in</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DYQMWSKG?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91-cr7FPi8L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">LG OLED A1 48" 4K Smart TV</div>
+        <div class="desc">Dolby Vision IQ & Atmos, Alexa built-in</div>
+        <div class="location">Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B09GQ1CLTL?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61EqoGhaNiL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Sonos Beam Gen 2 Soundbar</div>
+        <div class="desc">Dolby Atmos, black</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0719CG8G3?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81bypv23yzL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Valuxhome 36" Electric Fireplace Insert</div>
+        <div class="desc">Fire crackling sound, remote control, 750/1500W</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="living-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B075ZZND8B?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61CTovxtJTL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">HATHASPACE Smart Air Purifier</div>
+        <div class="desc">True HEPA, 700 sq ft coverage</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B073DQBSR2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91QrrrWY83L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Nourison Passion Area Rug</div>
+        <div class="desc">1'10" x 6', fuchsia</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B093NKC9S1?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71x51yFlUcS._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">PhiDor Strawberry Flower Vase</div>
+        <div class="desc">Vintage ceramic, decorative accent</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0BCG9J81B?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81Aih8rTnUL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Coume Fruit Pillows, Set of 4</div>
+        <div class="desc">15.7" round watermelon, kiwi, lemon, orange cushions</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B09V2HD3FX?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/41UowMPHGDL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">JWH 3D Flower Throw Pillow, 14"</div>
+        <div class="desc">Handmade floral accent, mustard yellow, with insert</div>
+        <div class="location">Living Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="living-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B07HHHLWXC?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81oGzGpDrCL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Gorilla Grip Desk Protector Pad (XL)</div>
+        <div class="desc">Faux leather, slip resistant, dual sided, white</div>
+        <div class="location">Desk / Office Area</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0C33XGCVR?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71AOulH37yL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">MyGift Whitewashed Wood Mail Holder</div>
+        <div class="desc">Desktop organizer with "MAIL" script</div>
+        <div class="location">Entryway</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B096N8DN2H?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71W17ZX8yuL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Epson EcoTank ET-2800 Printer</div>
+        <div class="desc">Wireless all-in-one, cartridge-free supertank</div>
+        <div class="location">Office Area</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- =====================================================
+         BATHROOMS
+         ===================================================== -->
+    <div class="section-header" id="bath">
+      <h2><span class="icon">&#128701;</span> Bathrooms</h2>
+      <p>Shower fixtures, toiletries, towels, and accessories</p>
+    </div>
+
+    <div class="sub-tabs" data-section="bath">
+      <button class="sub-tab active" data-tab="bath-0">Shower & Bath</button>
+      <button class="sub-tab" data-tab="bath-1">Accessories</button>
+      <button class="sub-tab" data-tab="bath-2">Refills</button>
+    </div>
+
+    <div class="sub-panel" id="bath-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B082D38XHJ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81-c4NRYH1L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">AmazerBath Waffle Shower Curtain</div>
+        <div class="desc">White, heavy duty fabric, 72x72"</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CLZVQK2W?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/713dKUWyT2L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">TwoP Brands Shampoo/Conditioner Dispensers, Set of 3</div>
+        <div class="desc">16oz printed pump bottles for shower wall</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0B4VQW3HL?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71pXFlVHhSL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Waterfall Bathtub Faucet Set</div>
+        <div class="desc">Matte black, wall mount with handheld shower</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07DL8JB3L?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81A1nDf27pL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">KAIREY LED Color-Changing Shower Head</div>
+        <div class="desc">7 colors, with 60" hose and adjustable bracket</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="bath-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B06XX81D7R?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81X2YxV7TWL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Poo-Pourri Tropical Hibiscus</div>
+        <div class="desc">16oz refill + 1.4oz spray</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FT7KR6WG?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71n7u9E5WoL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">WHOLE HOUSEWARES Mosaic Tissue Box</div>
+        <div class="desc">Mermaid glass mosaic design</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B096VL5DFV?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71X4gmPJrFL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Square Rattan Tissue Box Cover</div>
+        <div class="desc">Hand woven wicker, honey brown, 5.5x5.5x5.7"</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07WZVQWDK?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/41A8JHFs-iL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">TASTOS Toilet Paper Holder</div>
+        <div class="desc">Brushed nickel, modern square style</div>
+        <div class="location">Bathroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CKXKG7QD?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61+uysKIceL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Hibbent Silicone Toilet Brush, 2-Pack</div>
+        <div class="desc">Wall mounted or floor standing, black</div>
+        <div class="location">Bathrooms</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FHKV7W7G?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71Ge+Oq8+wL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Gudetap Towel Hooks, 4-Pack</div>
+        <div class="desc">Matte black, stainless steel, wall mount</div>
+        <div class="location">Bathrooms</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="bath-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B0D26GN9WT?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/519dhqHVO0L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Ginger Lily Farms Shampoo, 1 Gallon</div>
+        <div class="desc">Coco mango, 100% vegan & cruelty-free</div>
+        <div class="location">Bathroom (Refill)</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B00DQSKVIO?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51z3WN1XA6L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Ginger Lily Farms Body Wash, 1 Gallon</div>
+        <div class="desc">Coco mango, 100% vegan & cruelty-free</div>
+        <div class="location">Bathroom (Refill)</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- =====================================================
+         OUTDOOR LIVING
+         ===================================================== -->
+    <div class="section-header" id="outdoor">
+      <h2><span class="icon">&#127796;</span> Outdoor Living</h2>
+      <p>Patio furniture, lighting, shower, EV charging, and garden decor</p>
+    </div>
+
+    <div class="sub-tabs" data-section="outdoor">
+      <button class="sub-tab active" data-tab="outdoor-0">Patio & Furniture</button>
+      <button class="sub-tab" data-tab="outdoor-1">Solar & Lighting</button>
+      <button class="sub-tab" data-tab="outdoor-2">Décor & Entry</button>
+      <button class="sub-tab" data-tab="outdoor-3">Garage & EV</button>
+    </div>
+
+    <div class="sub-panel" id="outdoor-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B09R29M2XB?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51GMXhV-ekL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Ashley Clare View Eucalyptus Loveseat</div>
+        <div class="desc">Coastal outdoor patio with cushions, beige</div>
+        <div class="location">Patio</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B083K3NM1H?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71nG5kVtVoL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">TomCare Solar Lanterns, 2-Pack</div>
+        <div class="desc">Metal decorative, waterproof outdoor lanterns</div>
+        <div class="location">Patio</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07R1WT8GH?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81BLTpnFlsL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">gotonovo Outdoor Shower Faucet Set</div>
+        <div class="desc">8" rainfall, 3-function, matte black, 2 cross handles</div>
+        <div class="location">Outdoor Shower</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08MTZ25RP?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81SGen4QQYL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Pillow Perfect Outdoor Pillows, Set of 2</div>
+        <div class="desc">Hooked Lagoon, 16.5x16.5", blue</div>
+        <div class="location">Patio</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B006VMYVGU?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81sTd8f40qL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Pillow Perfect Outdoor Lumbar Pillows</div>
+        <div class="desc">Blue/purple Gregoire, 11.5x18.5"</div>
+        <div class="location">Patio</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07BG595PV?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/916dFZWKWRL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Pillow Perfect Make It Rain Throw Pillows, Set of 2</div>
+        <div class="desc">Blue, rectangular outdoor</div>
+        <div class="location">Patio</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0725S72L6?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71V9N2ar1aL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Occasions Pressed Vinyl Placemats, 10-Pack</div>
+        <div class="desc">Garden green, indoor/outdoor</div>
+        <div class="location">Outdoor Dining</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07G276ZGW?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81g8mvLPg+L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Wintop Round Metallic Placemats, Set of 6</div>
+        <div class="desc">16.5" raindrop design, copper</div>
+        <div class="location">Dining</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="outdoor-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B082VZMHMR?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81xLbvvMo0L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Solar String Lights, 144ft 2-Pack</div>
+        <div class="desc">400 LED, copper wire, 8 modes, warm white</div>
+        <div class="location">Backyard</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B087FJ39J8?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61tduEWPfDL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">CIYOYO Solar Deck Lights, 8-Pack</div>
+        <div class="desc">Waterproof, warm white/color glow</div>
+        <div class="location">Patio Steps</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DSKF9KDR?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81WqQh9c0gL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Aootek Solar Security Lights 120 LED, 4-Pack</div>
+        <div class="desc">270&#176; wide angle, IP65 waterproof</div>
+        <div class="location">Front Door / Yard</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0BZ8LZPG5?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81b-rkLkT6L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">TONULAX Solar Swaying Garden Lights, 4-Pack</div>
+        <div class="desc">Sway by wind, warm white</div>
+        <div class="location">Garden</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B091GDBZDG?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81eUw1WQjhL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Yungeln Metal Bumble Bee Wall Decor, 4-Pack</div>
+        <div class="desc">3D iron art sculpture, outdoor/indoor</div>
+        <div class="location">Garden / Patio</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="outdoor-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B076BRZGMW?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81HByJjZZ5L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">"Swimsuit is Optional" Wooden Beach Sign</div>
+        <div class="desc">Hand carved, cocktails & beach theme, green</div>
+        <div class="location">Outdoor</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07Y416M2J?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91k-G1i96eL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">DII Palm Beach Doormat</div>
+        <div class="desc">Natural coir, 17x29"</div>
+        <div class="location">Front Door</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0C54CXNFJ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/611yyovycwL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Pink Flamingo Cast Iron Wall Hooks, Set of 3</div>
+        <div class="desc">4 inch, tropical coastal decor</div>
+        <div class="location">Outdoor</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B081K722G3?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/516Rj1vGeVL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Rustic Blue Cast Iron Whale Tail Hooks, Set of 3</div>
+        <div class="desc">4.5 inch, coastal wall decor</div>
+        <div class="location">Outdoor</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="outdoor-3" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B09J9ZWZ9Q?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/31R2Cj5T-2L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Google Nest Cam with Floodlight</div>
+        <div class="desc">Outdoor security camera + floodlight</div>
+        <div class="location">Exterior</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0BQMCTMG2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61lU5VDBAPL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">SEGUMA J1772 to Tesla Adapter</div>
+        <div class="desc">80A/240V, fast charging for Model 3/Y/X/S</div>
+        <div class="location">Garage / EV Station</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0D7C8SFWC?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71GtFbEZhbL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">EzGoGo EV Charger Holder</div>
+        <div class="desc">Wall connector holster dock for J1772</div>
+        <div class="location">Garage</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0DGFXXPMF?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/717yAEbR2gL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">DASANRAO EV Charger Cable Organizer</div>
+        <div class="desc">Wall mount nozzle holster for J1772</div>
+        <div class="location">Garage</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- EV Charging -->
+    
+
+    
+
+    
+
+    <!-- Wall Decor -->
+    
+
+    
+
+    
+
+    <!-- =====================================================
+         HOME GYM
+         ===================================================== -->
+    <div class="section-header" id="gym">
+      <h2><span class="icon">&#127947;</span> Home Gym</h2>
+      <p>Build your own home gym with our setup</p>
+    </div>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07SM8VJ6P?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/613VBj-2a4L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Sportsroyals Power Tower Dip Station</div>
+        <div class="desc">Pull up bar, 400 lbs capacity</div>
+        <div class="location">Garage Gym</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07DNYSJ8W?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71ijsNeaN-L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">FLYBIRD Adjustable Weight Bench</div>
+        <div class="desc">Fast folding, full body workout</div>
+        <div class="location">Garage Gym</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B008DNAJ5M?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71aaRfpw9uL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Perfect Fitness Perfect Pushup Elite</div>
+        <div class="desc">Rotating pushup handles</div>
+        <div class="location">Garage Gym</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0B18GK5WT?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71+ey5GJEpL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">WF Athletic Supply Interlocking Foam Tiles</div>
+        <div class="desc">1/2" thick, 109 sq ft, gray/blue reversible</div>
+        <div class="location">Garage Gym Floor</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B076142XF4?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91HYeymxj8L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Amazon Basics Foam Roller, 24"</div>
+        <div class="desc">High-density, blue speckled</div>
+        <div class="location">Garage Gym</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0016BWUGE?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71ubsLi4i-L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Sunny Health & Fitness Yoga Mat</div>
+        <div class="desc">Blue</div>
+        <div class="location">Garage Gym</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FJFL8KP4?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/710eUS5fjwL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">RENPHO Smart Body Scale</div>
+        <div class="desc">Bluetooth, body composition, smartphone app</div>
+        <div class="location">Garage Gym</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <!-- =====================================================
+         LAUNDRY ROOM
+         ===================================================== -->
+    <div class="section-header" id="laundry">
+      <h2><span class="icon">&#128090;</span> Laundry Room</h2>
+      <p>Keeping things fresh and pressed</p>
+    </div>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B09PY8XKDX?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61TzPeuzMXL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">FairyHaus White Wood Hangers, 30-Pack</div>
+        <div class="desc">360&#176; swivel hook, notches, pants bar</div>
+        <div class="location">Closets</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0D5L7FFST?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/712mqKGtNpL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">TJ.MOREE Ironing Board Wall Mount Hanger</div>
+        <div class="desc">Wooden base basket with removable hooks, white</div>
+        <div class="location">Laundry Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07V91437Y?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71YfKXR18lL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Conair Turbo ExtremeSteam Handheld Steamer</div>
+        <div class="desc">1875W, portable design</div>
+        <div class="location">Laundry Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0B5CLXZ9W?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51syNQ8vW4L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">ChengFu Acrylic Dryer Sheet Holder</div>
+        <div class="desc">Hinged lid, white, laundry room decor</div>
+        <div class="location">Laundry Room</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <!-- =====================================================
+         LIGHTING & FIXTURES
+         ===================================================== -->
+    <div class="section-header" id="lighting">
+      <h2><span class="icon">&#128161;</span> Lighting & Fixtures</h2>
+      <p>Statement lights throughout the home</p>
+    </div>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07Q4SNW22?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71w5xRQPWiL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Modern Moravian Star Pendant Light, 16"</div>
+        <div class="desc">Seeded glass, large statement piece</div>
+        <div class="location">Dining / Entryway</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07GYPBS7F?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81-vy5UCBQL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">JONATHAN Y Wood Bead Flush Mount</div>
+        <div class="desc">3-light bohemian farmhouse, black/light taupe, 14"</div>
+        <div class="location">Hallway / Bedroom</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B096JZBCZK?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71KfAOUlYDL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">ARIAMOTION Glass Bubble Pendants, 3-Pack</div>
+        <div class="desc">Blue globe seeded glass, brushed nickel, 7"</div>
+        <div class="location">Kitchen Island</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07QXMXWFN?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51O3mUgU5mL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">MAZ-TEK Dimmable Night Lights, 4-Pack</div>
+        <div class="desc">Auto dusk-to-dawn sensor, warm white plug-in</div>
+        <div class="location">Hallways</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <!-- =====================================================
+         COFFEE TABLE BOOKS
+         ===================================================== -->
+    <div class="section-header" id="books">
+      <h2><span class="icon">&#128218;</span> Coffee Table Books</h2>
+      <p>The curated collection on display</p>
+    </div>
+
+    <a class="product-card" href="https://www.amazon.com/dp/3836569507?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81JEjMX+RkL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">The NASA Archives: 60 Years in Space</div>
+        <div class="desc">TASCHEN large format photography book</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/3836581175?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81GWPPCNpkL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">The Star Wars Archives: 1977&#8211;1983</div>
+        <div class="desc">Behind-the-scenes of the original trilogy</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/3836574209?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/810LBOmzM9L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Frida Kahlo: The Complete Paintings</div>
+        <div class="desc">Definitive Kahlo art collection</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/1426215649?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91vMxtTtWaL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Destinations of a Lifetime</div>
+        <div class="desc">National Geographic, 225 amazing places</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CR75R64K?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71WTU2zyOtL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Miami Beach</div>
+        <div class="desc">Photography & culture book</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/3836580993?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71QV9tktPEL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Walt Disney's Mickey Mouse: The Ultimate History</div>
+        <div class="desc">TASCHEN ultimate history edition</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/1614285373?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71AooB318iL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Chic Stays</div>
+        <div class="desc">Assouline coffee table book</div>
+        <div class="location">Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/0358381134?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71r5nRA7OYL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Betty Crocker Best 100</div>
+        <div class="desc">Favorite recipes from America's most trusted cook</div>
+        <div class="location">Kitchen / Coffee Table</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <!-- =====================================================
+         CLEANING & PET CARE
+         ===================================================== -->
+    <div class="section-header" id="cleaning">
+      <h2><span class="icon">&#129529;</span> Cleaning & Pet Care</h2>
+      <p>Vacuums, pet supplies, and cleaning essentials</p>
+    </div>
+
+    <div class="sub-tabs" data-section="cleaning">
+      <button class="sub-tab active" data-tab="cleaning-0">Indoor</button>
+      <button class="sub-tab" data-tab="cleaning-1">Pet & Yard</button>
+      <button class="sub-tab" data-tab="cleaning-2">Tools</button>
+    </div>
+
+    <div class="sub-panel" id="cleaning-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B0091JG0LY?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/711-Fzuc8zL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Shark Rotator Professional Vacuum</div>
+        <div class="desc">NV501, lift-away, HEPA filter, LED headlights</div>
+        <div class="location">Closet</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0B2BMHMC2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61OYbVb-Q9L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Hoover PowerDash Pet Carpet Cleaner</div>
+        <div class="desc">Compact, lightweight, blue</div>
+        <div class="location">Closet</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B00BAGTNAQ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71mmJsbMGZL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Chom Chom Pet Hair Remover Roller</div>
+        <div class="desc">Reusable, works on furniture & clothing</div>
+        <div class="location">Closet</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07N316V8C?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71w3SPvw8XL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Angry Orange Pet Odor Eliminator</div>
+        <div class="desc">8oz concentrate, makes 128oz, citrus</div>
+        <div class="location">Cleaning Supplies</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="cleaning-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B0C7F1QS76?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61IzGo+WZ5L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Pawler Dog Pooper Scooper</div>
+        <div class="desc">Heavy-duty metal, rake & tray set</div>
+        <div class="location">Yard</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FRMF63TV?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/614bJcmjThL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Dog Poop Bag Dispenser (Wall Mount)</div>
+        <div class="desc">Waterproof outdoor, with lock</div>
+        <div class="location">Yard</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="cleaning-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B01DI8H364?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81OcrGiut5L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Berry Ave Broom & Tool Organizer</div>
+        <div class="desc">Wall mount, holds handles up to 1.25", white</div>
+        <div class="location">Garage</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- =====================================================
+         HARDWARE & HOME DETAILS
+         ===================================================== -->
+    <div class="section-header" id="hardware">
+      <h2><span class="icon">&#128295;</span> Hardware & Home Details</h2>
+      <p>The finishing touches that make a house feel like home</p>
+    </div>
+
+    <div class="sub-tabs" data-section="hardware">
+      <button class="sub-tab active" data-tab="hardware-0">Doors & Barn</button>
+      <button class="sub-tab" data-tab="hardware-1">Cabinet</button>
+      <button class="sub-tab" data-tab="hardware-2">Wall Hooks & Décor</button>
+      <button class="sub-tab" data-tab="hardware-3">Gates & Outdoor</button>
+      <button class="sub-tab" data-tab="hardware-4">Floor & Rug</button>
+    </div>
+
+    <div class="sub-panel" id="hardware-0">
+    <a class="product-card" href="https://www.amazon.com/dp/B0GQ43LMDP?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/91bvWNaIt9L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">SMARTSTANDARD 6.6ft Sliding Barn Door Hardware</div>
+        <div class="desc">Top mount, T-shape, fits 36&#8211;40" doors</div>
+        <div class="location">Interior</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07BVCSSB9?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/717aV26W4UL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">EaseLife 12" Barn Door Handles</div>
+        <div class="desc">Double sided, matte black, square</div>
+        <div class="location">Interior</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0FG359YKH?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/711QcnMZcRL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Self-Closing Door Hinges, 4-Pack</div>
+        <div class="desc">4x4", spring loaded, 5/8" radius, black</div>
+        <div class="location">Interior Doors</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B087CR1QVN?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61Ky6TDiGRL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">KOLAKO Magnetic Door Stoppers, 2-Pack</div>
+        <div class="desc">Brushed satin nickel, wall/floor mounted</div>
+        <div class="location">Interior</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="hardware-1" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B0CCRMHDHV?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51KhU5tgkXL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Black Cabinet Pulls, 10-Pack</div>
+        <div class="desc">5" matte black, vintage square, solid</div>
+        <div class="location">Kitchen / Bath</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0B2PGLFLL?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51slUhyDg5L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Jiozermi Half Moon Cabinet Pulls, 2-Pack</div>
+        <div class="desc">2.5" solid brass, gold</div>
+        <div class="location">Bathroom / Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0C5845K23?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51geoKnlZ6L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Black Cabinet Knobs, 10-Pack</div>
+        <div class="desc">1.5" round, matte black</div>
+        <div class="location">Kitchen / Bath</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CQ8VT3Q5?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61P0vx65jNL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Rev-A-Shelf Soft-Close Tip-Out Hinge</div>
+        <div class="desc">50&#176; pivot, single hinge for sink trays</div>
+        <div class="location">Kitchen Sink</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="hardware-2" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B07RBSGXZZ?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/51CFZoxjxhL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Lisol Light Switch Guards, 4-Pack</div>
+        <div class="desc">Clear, keeps switch on or off</div>
+        <div class="location">Various</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0CX8KW6FF?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71WcoAbRYkL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">SOFFEE DESIGN Mermaid Wall Hooks, Set of 2</div>
+        <div class="desc">Metal farmhouse coat hooks</div>
+        <div class="location">Bathroom / Entryway</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B00ZNNB0RG?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61R5uvb7WOL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">HERNGEE Giraffe Head Wall Hook</div>
+        <div class="desc">Rustic bronze, heavy duty decorative</div>
+        <div class="location">Entryway</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B07PY7ZLGN?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71iriOMPgoL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">ChasBete Gecko Wall Hooks, 3-Pack</div>
+        <div class="desc">Rustic iron, heavy duty for keys & towels</div>
+        <div class="location">Various</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B09VLJZNTL?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/611CAq2axiL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Umbra Flip 5-Hook Wall Rack</div>
+        <div class="desc">Retractable hooks, white, floating design</div>
+        <div class="location">Entryway</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="hardware-3" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B08DTC19TB?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/61K1YiCv3ZS._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Self-Closing Gate Hinges, 2-Pack</div>
+        <div class="desc">Heavy duty, 90&#176; adjustable, black</div>
+        <div class="location">Fence Gates</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08Q7T6JFX?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/7148b4GOYzL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Flip Latch Barn Gate Lock</div>
+        <div class="desc">6.5" rustic iron, black</div>
+        <div class="location">Gates</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0D29DJ64W?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81AGI8iDgCL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">WELLUCK Bird Spikes, 30 Feet</div>
+        <div class="desc">Stainless steel, harmless deterrent, 28 strips</div>
+        <div class="location">Exterior</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B0026T3AVY?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71Jk-qNRvhL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">EasyFlex Tree Trunk Protectors, 6-Pack</div>
+        <div class="desc">Gray, flexible</div>
+        <div class="location">Yard</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+    <div class="sub-panel" id="hardware-4" style="display:none">
+    <a class="product-card" href="https://www.amazon.com/dp/B093LBWX8Q?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/71gY01Jjf8L._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">Chair Leg Floor Protectors, 16-Pack</div>
+        <div class="desc">Square, silicone with felt, 1.5", black</div>
+        <div class="location">Dining / Kitchen</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    <a class="product-card" href="https://www.amazon.com/dp/B08B12BFK2?tag=empiretext-20" target="_blank" rel="noopener">
+      <img class="product-icon" src="https://m.media-amazon.com/images/I/81DA4lS7wBL._AC_UL160_.jpg" alt="" loading="lazy">
+      <div class="product-info">
+        <div class="name">ZONGOOL Rug Tape, 12-Pack</div>
+        <div class="desc">Reusable, double-sided non-slip pads</div>
+        <div class="location">Rugs</div>
+      </div>
+      <div class="product-arrow">&#8250;</div>
+    </a>
+
+    </div>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- Decorative Hooks -->
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!-- ===== AMAZON ASSOCIATES DISCLOSURE (REQUIRED) ===== -->
+    <div class="disclosure">
+      <strong>Disclosure:</strong> As an Amazon Associate, we earn from qualifying purchases.
+      This doesn't change the price you pay. We only recommend products we actually use in our home.
+      <br><br>
+      &copy; Pinecrest Vacation Rentals
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.cat-nav a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var targetId = this.getAttribute('href').substring(1);
+        var target = document.getElementById(targetId);
+        if (target) {
+          var navHeight = document.querySelector('.cat-nav').offsetHeight;
+          var y = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 8;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+        document.querySelectorAll('.cat-nav a').forEach(function(a) { a.classList.remove('active'); });
+        this.classList.add('active');
+      });
+    });
+    var sections = document.querySelectorAll('.section-header');
+    var navLinks = document.querySelectorAll('.cat-nav a');
+    window.addEventListener('scroll', function() {
+      var scrollPos = window.scrollY + 120;
+      sections.forEach(function(section) {
+        if (section.offsetTop <= scrollPos) {
+          navLinks.forEach(function(a) { a.classList.remove('active'); });
+          var matchingLink = document.querySelector('.cat-nav a[href="#' + section.id + '"]');
+          if (matchingLink) matchingLink.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+
+  <script>
+    /* Subcategory tab switching */
+    document.querySelectorAll('.sub-tab').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const section = this.closest('.container') || document.body;
+        const tabGroup = this.parentElement;
+        const sectionId = tabGroup.dataset.section;
+        
+        /* Deactivate all tabs in this group */
+        tabGroup.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        /* Show/hide panels */
+        const targetId = this.dataset.tab;
+        document.querySelectorAll('.sub-panel').forEach(panel => {
+          if (panel.id.startsWith(sectionId + '-')) {
+            panel.style.display = panel.id === targetId ? '' : 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
